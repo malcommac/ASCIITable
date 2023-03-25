@@ -19,7 +19,9 @@ extension ASCIITable: TerminalRepresentable {
         var columnWidths = [Int](repeating: 0, count: columns.count)
         var hasHeaderTopBorder = false
         var hasHeaderBottomBorder = false
-        let headerLines = columns.map { $0.header?.title.split(separator: "\n") ?? [] }
+        let headerLines = columns.map {
+            $0.header?.title.split(separator: "\n") ?? []
+        }
 
         var headerHeight: Int = 0
         for (columnIndex, column) in zip(0..., columns) {
@@ -84,21 +86,19 @@ extension ASCIITable: TerminalRepresentable {
                 text: paddedLines,
                 height: headerHeight - (hasHeaderTopBorder ? 1 : 0) - (hasHeaderBottomBorder ? 1 : 0)
             )
-            let horizontallyAlignedLines = header.textAlignment.h
-                .apply(
-                    text: verticallyAlignedLines,
-                    width: max(columnWidth - header.margins.count, column.minWidth),
-                    filler: style.filler
-                )
-                .map { line in
-                    "\(header.margins.leading)\(line)\(header.margins.trailing)"
-                }
+            let horizontallyAlignedLines = header.textAlignment.h.apply(
+                text: verticallyAlignedLines,
+                width: max(columnWidth - header.margins.count, column.minWidth),
+                filler: style.filler
+            ).map { line in
+                "\(header.margins.leading)\(line)\(header.margins.trailing)"
+            }
+            
             if hasHeaderTopBorder {
                 if let topBorder = header.borders.top {
-                    let borderLength = (
-                        columnWidth -
-                            (header.corners.topLeading != nil ? 1 : 0) -
-                            (header.corners.topTrailing != nil ? 1 : 0)
+                    let borderLength = (columnWidth -
+                        (header.corners.topLeading != nil ? 1 : 0) -
+                        (header.corners.topTrailing != nil ? 1 : 0)
                     )
                     if let leftCorner = header.corners.topLeading {
                         outputLines[0].append(leftCorner)
@@ -111,16 +111,17 @@ extension ASCIITable: TerminalRepresentable {
                     outputLines[0].append(String(repeating: " ", count: columnWidth))
                 }
             }
+            
             let outputStartIndex = hasHeaderTopBorder ? 1 : 0
             for lineIndex in 0 ..< headerContentHeight {
                 outputLines[lineIndex + outputStartIndex].append(horizontallyAlignedLines[lineIndex])
             }
+            
             if hasHeaderBottomBorder {
                 if let bottomBorder = header.borders.bottom {
-                    let borderLength = (
-                        columnWidth -
-                            (header.corners.bottomLeading != nil ? 1 : 0) -
-                            (header.corners.bottomTrailing != nil ? 1 : 0)
+                    let borderLength = (columnWidth -
+                        (header.corners.bottomLeading != nil ? 1 : 0) -
+                        (header.corners.bottomTrailing != nil ? 1 : 0)
                     )
                     if let leftCorner = header.corners.bottomLeading {
                         outputLines[headerHeight - 1].append(leftCorner)
@@ -141,24 +142,27 @@ extension ASCIITable: TerminalRepresentable {
 
         for contentCellLines in contentLines {
             columnIndex = ((columnIndex + 1) % columns.count)
-            if columnIndex == 0 { rowIndex += 1 }
+            if columnIndex == 0 {
+                rowIndex += 1
+            }
+            
             let column = columns[columnIndex]
             let rowHeight = rowHeights[rowIndex]
             let columnWidth = columnWidths[columnIndex]
             let verticallyPaddedLines = column.verticalPadding.apply(lines: contentCellLines)
-            let verticallyAlignedLines = verticallyPaddedLines.count < rowHeight
-                ? column.textAlignment.v.apply(text: verticallyPaddedLines, height: rowHeight)
-                : verticallyPaddedLines
-            let horizontallyAlignedLines = column.textAlignment.h
-                .apply(
-                    text: verticallyAlignedLines,
-                    width: max(columnWidth - column.margins.count, column.minWidth),
-                    filler: style.filler
-                )
-                .map { line in
-                    "\(column.margins.leading)\(line)\(column.margins.trailing)"
-                }
-
+            let verticallyAlignedLines = (
+                verticallyPaddedLines.count < rowHeight ?
+                    column.textAlignment.v.apply(text: verticallyPaddedLines, height: rowHeight) :
+                    verticallyPaddedLines
+            )
+            let horizontallyAlignedLines = column.textAlignment.h.apply(
+                text: verticallyAlignedLines,
+                width: max(columnWidth - column.margins.count, column.minWidth),
+                filler: style.filler
+            ).map { line in
+                "\(column.margins.leading)\(line)\(column.margins.trailing)"
+            }
+            
             for (lineIndex, line) in zip(0..., horizontallyAlignedLines) {
                 outputLines[startLine + lineIndex] += line
             }
@@ -167,8 +171,10 @@ extension ASCIITable: TerminalRepresentable {
             }
         }
 
+        // Draw footer
         if hasVisibleFooter {
             let lastIndex = outputLines.endIndex - 1
+            
             for (columnIndex, column) in zip(0..., columns) {
                 let columnWidth = columnWidths[columnIndex]
                 if let footer = column.footer {
@@ -184,6 +190,7 @@ extension ASCIITable: TerminalRepresentable {
                     outputLines[lastIndex].append(String(repeating: " ", count: columnWidth))
                 }
             }
+            
         }
 
         return outputLines.joined(separator: "\n")

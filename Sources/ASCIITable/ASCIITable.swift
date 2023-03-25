@@ -17,13 +17,13 @@ public struct ASCIITable {
     // MARK: - Public Properties
     
     /// Columns list.
-    var columns: [Column]
+    public private(set) var columns: [Column]
     
     /// The content of the table.
-    var content: [TerminalRepresentable]
+    public let content: [TerminalRepresentable]
     
     /// Style used to draw the table.
-    let style: Style
+    public let style: Style
     
     // MARK: - Initialization
     
