@@ -13,7 +13,7 @@
 import Foundation
 
 @resultBuilder
-public enum TableDisplayBuilder {
+public enum TerminalDisplayElementsBuilder {
     
     // MARK: - Public Properties
     
@@ -50,7 +50,7 @@ public enum TableDisplayBuilder {
         []
     }
 
-    public static func buildExpression(_ expression: Expression) -> TableDisplayBuilder.Component {
+    public static func buildExpression(_ expression: Expression) -> TerminalDisplayElementsBuilder.Component {
         [expression]
     }
 

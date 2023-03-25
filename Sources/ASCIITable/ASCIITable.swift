@@ -35,7 +35,7 @@ public struct ASCIITable {
     ///   - content: content of the table.
     public init(style: Style = .default,
                 columns: [Column],
-                @TableDisplayBuilder content: () -> [TerminalRepresentable]) {
+                @TerminalDisplayElementsBuilder content: () -> [TerminalRepresentable]) {
         self.columns = columns
         self.style = style
         self.content = content()
