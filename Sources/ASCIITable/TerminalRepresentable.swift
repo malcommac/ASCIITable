@@ -1,14 +1,4 @@
-//
-//  ASCIITable
-//  Table drawing library for terminal, made in Swift
-//
-//  Created & Maintained by Daniele Margutti
-//  Email: hello@danielemargutti.com
-//  Web: http://www.danielemargutti.com
-//
-//  Copyright ©2023 Daniele Margutti.
-//  Licensed under MIT License.
-//
+// TerminalRepresentable.swift
 
 import Foundation
 
@@ -16,7 +6,9 @@ import Foundation
 
 /// Represent the output visible on terminal.
 public protocol TerminalRepresentable {
+    
     var stringValue: String { get }
+    
 }
 
 // MARK: - Default Conformances to TerminalRepresentable

@@ -1,14 +1,4 @@
-//
-//  ASCIITable
-//  Table drawing library for terminal, made in Swift
-//
-//  Created & Maintained by Daniele Margutti
-//  Email: hello@danielemargutti.com
-//  Web: http://www.danielemargutti.com
-//
-//  Copyright ©2023 Daniele Margutti.
-//  Licensed under MIT License.
-//
+// ASCIITable+Support.swift
 
 import Foundation
 
