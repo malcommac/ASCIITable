@@ -1,4 +1,13 @@
-// ASCIITable+ResultBuilder.swift
+//
+//  TermTable
+//  ASCII Table generator for Swift
+//
+//  Created by: Daniele Margutti <hello@danielemargutti.com>
+//  Web: http://www.danielemargutti.com
+//
+//  Copyright ©2023 Daniele Margutti
+//  Licensed under MIT License.
+//
 
 import Foundation
 

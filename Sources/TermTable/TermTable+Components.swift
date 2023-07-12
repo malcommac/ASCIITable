@@ -1,10 +1,19 @@
-// ASCIITable+Components.swift
+//
+//  TermTable
+//  ASCII Table generator for Swift
+//
+//  Created by: Daniele Margutti <hello@danielemargutti.com>
+//  Web: http://www.danielemargutti.com
+//
+//  Copyright ©2023 Daniele Margutti
+//  Licensed under MIT License.
+//
 
 import Foundation
 
 // MARK: - Column
 
-extension ASCIITable {
+extension TermTable {
         
     public struct Column: ExpressibleByStringLiteral {
         
@@ -50,22 +59,22 @@ extension ASCIITable {
 
 // MARK: - Column Header
 
-extension ASCIITable.Column {
+extension TermTable.Column {
  
     public struct Header {
         
         // MARK: - Attributes
         
         public var title: String
-        public var textAlignment: ASCIITable.TextAlign = (.center, .middle)
-        public var verticalPadding: ASCIITable.VerticalPadding = .zero
+        public var textAlignment: TermTable.TextAlign = (.center, .middle)
+        public var verticalPadding: TermTable.VerticalPadding = .zero
         public var minHeight = 0
 
         // MARK: - Style Properties
 
-        var margins: ASCIITable.Margins = .none
-        var borders: ASCIITable.Borders = (nil, nil)
-        var corners: ASCIITable.Corners = .defaults
+        var margins: TermTable.Margins = .none
+        var borders: TermTable.Borders = (nil, nil)
+        var corners: TermTable.Corners = .defaults
 
         var decorationHeight: Int {
             (self.borders.bottom != nil ? 1 : 0) +
@@ -91,7 +100,7 @@ extension ASCIITable.Column {
     
 // MARK: - Column Footer
 
-extension ASCIITable.Column {
+extension TermTable.Column {
  
     struct Footer {
         
@@ -117,7 +126,7 @@ extension ASCIITable.Column {
 
 // MARK: - Table Style
 
-extension ASCIITable {
+extension TermTable {
     
     public struct Style {
         

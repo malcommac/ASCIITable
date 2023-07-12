@@ -1,8 +1,12 @@
 //
-//  File.swift
-//  
+//  TermTable
+//  ASCII Table generator for Swift
 //
-//  Created by daniele on 25/03/23.
+//  Created by: Daniele Margutti <hello@danielemargutti.com>
+//  Web: http://www.danielemargutti.com
+//
+//  Copyright ©2023 Daniele Margutti
+//  Licensed under MIT License.
 //
 
 import Foundation

@@ -1,8 +1,17 @@
-// ASCIITable+Render.swift
+//
+//  TermTable
+//  ASCII Table generator for Swift
+//
+//  Created by: Daniele Margutti <hello@danielemargutti.com>
+//  Web: http://www.danielemargutti.com
+//
+//  Copyright ©2023 Daniele Margutti
+//  Licensed under MIT License.
+//
 
 import Foundation
 
-extension ASCIITable: TerminalRepresentable {
+extension TermTable: TerminalRepresentable {
     
     /// Render table as ASCII representation.
     public var stringValue: String {
